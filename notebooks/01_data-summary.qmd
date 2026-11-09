@@ -1,0 +1,26 @@
+---
+title: "Data Summary"
+---
+
+```{r}
+# Which data to use. Develop with "public" (simulated).
+# Only a person, working WITHOUT AI, changes this to "private".
+data_dir <- "public"
+
+nhanes <- readr::read_csv(
+  here::here("inputs", data_dir, "raw", "nhanes_2021_2023_analysis.csv"),
+  show_col_types = FALSE
+)
+```
+
+## Structure
+
+```{r}
+
+```
+
+## Summary
+
+```{r}
+
+```
