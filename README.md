@@ -27,7 +27,7 @@ You need R with the **tidyverse**, **rmarkdown**, and **here** packages, and Qua
 | Layer | Where | How strong |
 |---|---|---|
 | Git | `.gitignore` excludes every `private/` folder | Deterministic, but only for files git doesn't already track |
-| Pre-commit hook | Framework's git hook refuses commits that include private data | Deterministic, but skipped by `git commit --no-verify` |
+| Pre-commit hook | Framework installs a git hook that refuses commits with private data (in projects it creates; a clone or zip doesn't include it) | Deterministic, but skipped by `git commit --no-verify` |
 | Tool permissions | `.claude/settings.json` denies Claude Code access to the private folders and turns on its sandbox | Enforced by the tool, but only that tool |
 | Context file | `AGENTS.md` | An instruction; the model can ignore it |
 | Skill | `protected-data` in `.agents/skills/` and `.claude/skills/` | An instruction; **not proof of safety** |
