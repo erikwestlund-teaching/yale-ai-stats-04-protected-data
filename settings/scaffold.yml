@@ -1,0 +1,9 @@
+scaffold:
+  seed_on_scaffold: true
+  seed: '123'
+  set_theme_on_scaffold: false
+  ggplot_theme: theme_minimal
+  notebook_format: quarto
+  workflow: quarto
+  positron: false
+  source_all_functions: true

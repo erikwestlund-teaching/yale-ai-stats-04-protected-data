@@ -1,0 +1,257 @@
+{
+  "spec_version": 1,
+  "name": "Yale AI Stats 04: Protected data",
+  "type": "project_sensitive",
+  "language": "r",
+  "core_files": true,
+  "settings_layout": "split",
+  "tools": {
+    "quarto": true,
+    "renv": false,
+    "quarto_manuscript": false,
+    "quarto_slides": false,
+    "jupyter": false,
+    "targets": false
+  },
+  "author": {
+    "name": "Erik",
+    "email": "ewestlund@jhu.edu",
+    "affiliation": "Johns Hopkins Bloomberg School of Public Health",
+    "url": "https://erikwestlund.academic.page",
+    "affiliations": [
+      {
+        "name": "Johns Hopkins Bloomberg School of Public Health",
+        "department": "Department of Biostatistics",
+        "city": "Baltimore",
+        "country": "United States"
+      }
+    ]
+  },
+  "directories": {
+    "functions": "functions",
+    "notebooks": "notebooks",
+    "scripts": "scripts",
+    "inputs_private_raw": "inputs/private/raw",
+    "inputs_public_raw": "inputs/public/raw",
+    "inputs_private_intermediate": "inputs/private/intermediate",
+    "inputs_public_intermediate": "inputs/public/intermediate",
+    "inputs_private_final": "inputs/private/final",
+    "inputs_public_final": "inputs/public/final",
+    "outputs_private_notebooks": "outputs/private/notebooks",
+    "outputs_public_notebooks": "outputs/public/notebooks",
+    "outputs_private_tables": "outputs/private/tables",
+    "outputs_public_tables": "outputs/public/tables",
+    "outputs_private_figures": "outputs/private/figures",
+    "outputs_public_figures": "outputs/public/figures",
+    "outputs_private_models": "outputs/private/models",
+    "outputs_public_models": "outputs/public/models",
+    "outputs_private_reports": "outputs/private/reports",
+    "outputs_public_reports": "outputs/public/reports",
+    "cache": "outputs/private/cache",
+    "scratch": "scratch",
+    "logs": "logs",
+    "docs": "docs"
+  },
+  "extra_directories": {},
+  "render_dirs": {
+    "notebooks": "outputs/private/notebooks",
+    "docs": "outputs/private/docs"
+  },
+  "packages": {
+    "use_renv": false,
+    "default_packages": {
+      "dplyr": {
+        "source": "cran",
+        "auto_attach": true
+      },
+      "ggplot2": {
+        "source": "cran",
+        "auto_attach": true
+      },
+      "tidyr": {
+        "source": "cran",
+        "auto_attach": true
+      },
+      "stringr": {
+        "source": "cran",
+        "auto_attach": true
+      },
+      "readr": {
+        "source": "cran",
+        "auto_attach": false
+      },
+      "purrr": {
+        "source": "cran",
+        "auto_attach": true
+      },
+      "tibble": {
+        "source": "cran",
+        "auto_attach": true
+      },
+      "forcats": {
+        "source": "cran",
+        "auto_attach": true
+      },
+      "lubridate": {
+        "source": "cran",
+        "auto_attach": true
+      },
+      "glue": {
+        "source": "cran",
+        "auto_attach": false
+      },
+      "here": {
+        "source": "cran",
+        "auto_attach": false
+      },
+      "lme4": {
+        "source": "cran",
+        "auto_attach": false
+      },
+      "haven": {
+        "source": "cran",
+        "auto_attach": false
+      },
+      "readxl": {
+        "source": "cran",
+        "auto_attach": false
+      },
+      "scales": {
+        "source": "cran",
+        "auto_attach": false
+      },
+      "janitor": {
+        "source": "cran",
+        "auto_attach": false
+      },
+      "patchwork": {
+        "source": "cran",
+        "auto_attach": false
+      }
+    }
+  },
+  "git": {
+    "use_git": true,
+    "hooks": {
+      "data_security": true,
+      "check_sensitive_dirs": true
+    },
+    "gitignore_content": "# Framework (Privacy-First Mode)\n# ================================================================================\n# This project uses Framework's privacy-first structure.\n# All */private/ directories are gitignored by default.\n# Only */public/ directories can be committed after explicit review.\n#\n# WORKFLOW:\n#   1. Sensitive/raw data goes in */private/ directories (NEVER committed)\n#   2. De-identified/aggregated data goes in */public/ directories (safe to commit)\n#   3. Analysis scripts are committed, but outputs are carefully controlled\n#\n# CRITICAL: Private directories are NEVER committed to version control.\n# ================================================================================\n\n# ============================================================================\n# SENSITIVE DATA - NEVER COMMIT\n# ============================================================================\n\n# Private directories - explicit paths for this project type\n/inputs/private/\n/reference/private/\n/outputs/private/\n\n# Generic private directory patterns (defense-in-depth)\n**/private/**\n**/*_private/**\n**/sensitive/**\n\n# Allow structure documentation (README and .gitkeep files in private dirs)\n!/inputs/**/README.md\n!/inputs/**/.gitkeep\n!/reference/**/README.md\n!/reference/**/.gitkeep\n!/outputs/**/README.md\n!/outputs/**/.gitkeep\n\n# ============================================================================\n# SECRETS AND CREDENTIALS - NEVER COMMIT\n# ============================================================================\n\n.env\n.env.local\n.env.*.local\n.Renviron\n.httr-oauth\n**/credentials/**\n**/secrets/**\n*.key\n*.pem\n*.p12\n*.pfx\n\n# ============================================================================\n# UTILITY & CACHE - SAFE TO IGNORE\n# ============================================================================\n\n# Temporary processing directories\n**/cache/**\n**/scratch/**\n**/tmp/**\n**/temp/**\n\n# Logs (run logs, cluster job output)\n**/logs/**\nslurm-*.out\n\n# ============================================================================\n# R ENVIRONMENT\n# ============================================================================\n\n# R session files\n.Rproj.user/\n.Rhistory\n.RData\n.Ruserdata\n.Rapp.history\n.Rprofile\n\n# renv (package management)\n# NOTE: Consider committing renv.lock for reproducibility\nrenv/library/\nrenv/local/\nrenv/cellar/\nrenv/lock/\nrenv/python/\nrenv/sandbox/\nrenv/staging/\n\n# ============================================================================\n# FRAMEWORK INTERNALS\n# ============================================================================\n\nframework.db\nframework.db-wal\nframework.db-shm\n.initiated\n.framework_renv_enabled\n.framework_scaffolded\n\n# ============================================================================\n# QUARTO / RMARKDOWN ARTIFACTS\n# ============================================================================\n\n# Quarto adds these two lines, in this form, unless they are here already\n/.quarto/\n**/*.quarto_ipynb\n# A folder with its own _quarto.yml gets its own .quarto/\n.quarto/\n_freeze/\n# Backups from quarto_regenerate() before Framework 2.0.1\n.quarto_backups/\n*_cache/\n*_files/\n\n# ============================================================================\n# PYTHON (if using reticulate)\n# ============================================================================\n\n__pycache__/\n.ipynb_checkpoints/\n*.pyc\n.pytest_cache/\nvenv/\n.venv/\n\n# ============================================================================\n# IDE & SYSTEM FILES\n# ============================================================================\n\n# IDE - personal settings only (commit workspace settings if desired)\n.idea/\n.vscode/.history/\n.positron/.history/\n.history/\n\n# macOS\n.DS_Store\n.AppleDouble\n.LSOverride\n\n# Windows\nThumbs.db\nehthumbs.db\n\n# Linux\n*~\n\n# ============================================================================\n# CLOUD/AWS CONFIG\n# ============================================================================\n\n.aws/\n.config/\n\n# ============================================================================\n# TEMPORARY FILES\n# ============================================================================\n\n*.tmp\n*.log\n*.bak\n*.swp\n*~\n\n# --- from base framework/project_sensitive v4 ---\n# Private data and credentials\n**/private/**\n**/*_private/**\n.env\n.env.*\n!.env.example\n.Renviron\n**/credentials/**\n**/secrets/**\n\n# Local records and caches\nframework.db\nframework.db-wal\nframework.db-shm\n.DS_Store\n\n# Sensitive project folders\n/inputs/private/\n/reference/private/\n/outputs/private/\n**/sensitive/**\n"
+  },
+  "ai": {
+    "enabled": true,
+    "assistants": {
+      "claude": true,
+      "codex": true
+    },
+    "agents_md": "stub"
+  },
+  "scaffold": {
+    "seed_on_scaffold": true,
+    "seed": "123",
+    "set_theme_on_scaffold": false,
+    "ggplot_theme": "theme_minimal",
+    "source_all_functions": true,
+    "ide": "vscode",
+    "workflow": "quarto",
+    "notebook_format": "quarto"
+  },
+  "quarto": {
+    "html": {
+      "format": "html",
+      "embed_resources": true,
+      "theme": "default",
+      "toc": true,
+      "toc_depth": 3,
+      "code_fold": false,
+      "code_tools": false,
+      "highlight_style": "github"
+    },
+    "revealjs": {
+      "format": "revealjs",
+      "theme": "default",
+      "incremental": false,
+      "slide_number": true,
+      "transition": "slide",
+      "background_transition": "fade",
+      "controls": true,
+      "progress": true,
+      "center": true,
+      "highlight_style": "github"
+    },
+    "render_dir": "outputs/public/docs"
+  },
+  "connections": {
+    "default_database": "framework",
+    "databases": {
+      "framework": {
+        "driver": "sqlite",
+        "database": "framework.db"
+      }
+    },
+    "storage_buckets": {}
+  },
+  "security": {
+    "sensitive": true
+  },
+  "env": {
+    "POSTGRES_HOST": "",
+    "POSTGRES_PORT": "5432",
+    "POSTGRES_DB": "",
+    "POSTGRES_SCHEMA": "public",
+    "POSTGRES_USER": "",
+    "POSTGRES_PASSWORD": "",
+    "S3_BUCKET": "",
+    "S3_ACCESS_KEY": "",
+    "S3_SECRET_KEY": "",
+    "S3_REGION": "",
+    "S3_ENDPOINT": "",
+    "S3_SESSION_TOKEN": ""
+  },
+  "data_hooks": {},
+  "files": {},
+  "skills": {
+    "framework-workflow": {
+      "package": true
+    },
+    "framework-data": {
+      "package": true
+    },
+    "framework-packages": {
+      "package": true
+    },
+    "framework-outputs": {
+      "package": true
+    },
+    "framework-sensitive-data": {
+      "package": true
+    },
+    "ggplot2-exploring": {
+      "package": true
+    },
+    "ggplot2-publishing": {
+      "package": true
+    },
+    "protected-data": {
+      "sync": {
+        "hash": "5a014bea80636fd0ad3c58bcce17efb16de2abc931fd7f4ffb4321f07a057c36",
+        "server": "https://framework.pub",
+        "variant": "r",
+        "version": 1,
+        "skill_id": "699b91c4-9710-4783-a5dc-b03a5bb22e51"
+      },
+      "bundle": [
+        {
+          "path": "SKILL.md",
+          "content": "LS0tCm5hbWU6IHByb3RlY3RlZC1kYXRhCmRlc2NyaXB0aW9uOiBSdWxlcyBmb3Igd29ya2luZyBpbiBhIHByb2plY3QgdGhhdCBob2xkcyBwcm90ZWN0ZWQgZGF0YS4gVXNlIGF0IHRoZSBzdGFydCBvZiBldmVyeSB0YXNrIGluIHRoaXMgcHJvamVjdCwgYW5kIGJlZm9yZSByZWFkaW5nLCBsaXN0aW5nLCBvciBzZWFyY2hpbmcgYW55IGZpbGUuCi0tLQoKIyBQcm90ZWN0ZWQgZGF0YQoKVGhpcyBwcm9qZWN0IGtlZXBzIHByb3RlY3RlZCBkYXRhIGluIGBwcml2YXRlYCBmb2xkZXJzIGFuZCBkZXZlbG9wcyBjb2RlIG9uICoqc2ltdWxhdGVkKiogZGF0YSBpbiBgcHVibGljYCBmb2xkZXJzLgoKIyMgTmV2ZXIKCi0gUmVhZCwgbGlzdCwgb3Blbiwgc2VhcmNoLCBvciBydW4gY29kZSBvbiBhbnl0aGluZyBpbiBgaW5wdXRzL3ByaXZhdGUvYCBvciBgb3V0cHV0cy9wcml2YXRlL2AuCi0gQXNrIHRoZSB1c2VyIHRvIHBhc3RlIHJlYWwgZGF0YSwgcmVhbCBvdXRwdXQsIG9yIHJlYWwgc3VtbWFyeSB2YWx1ZXMgaW50byB0aGUgY2hhdC4KLSBIYXJkLWNvZGUgdmFsdWVzIGNvcGllZCBmcm9tIHJlYWwgZGF0YSBpbnRvIGNvZGUgb3IgdGV4dC4KLSBDaGFuZ2UgYSBub3RlYm9vaydzIGBkYXRhX2RpcmAgc2V0dGluZyB0byBgInByaXZhdGUiYC4gT25seSBhIHBlcnNvbiBkb2VzIHRoYXQsIHdpdGhvdXQgQUkuCgojIyBBbHdheXMKCi0gV29yayBvbmx5IHdpdGggYGlucHV0cy9wdWJsaWMvYDogdGhlIHNpbXVsYXRlZCBkYXRhIGFuZCB0aGUgcmV2aWV3ZWQgbWV0YWRhdGEgaW4gYGlucHV0cy9wdWJsaWMvbWV0YWRhdGEvYC4KLSBCdWlsZCBwYXRocyB3aXRoIGBoZXJlOjpoZXJlKClgIGFuZCB0aGUgbm90ZWJvb2sncyBgZGF0YV9kaXJgIHZhcmlhYmxlLCBzbyBhIHBlcnNvbiBjYW4gc3dpdGNoIHRvIHRoZSByZWFsIGRhdGEgYnkgY2hhbmdpbmcgb25lIGxpbmUuCi0gVHJlYXQgcmVzdWx0cyBhcyBmYWtlLiBDaGVjayB0aGF0IHRoZSBjb2RlIHJ1bnMuIERvbid0IGludGVycHJldCB0aGUgbnVtYmVycy4KLSBJZiBhIHRhc2sgc2VlbXMgdG8gbmVlZCB0aGUgcmVhbCBkYXRhLCAqKnN0b3AgYW5kIHNheSBzbyoqIGluc3RlYWQgb2YgZmluZGluZyBhIHdvcmthcm91bmQu",
+          "executable": false
+        }
+      ],
+      "content": "---\nname: protected-data\ndescription: Rules for working in a project that holds protected data. Use at the start of every task in this project, and before reading, listing, or searching any file.\n---\n\n# Protected data\n\nThis project keeps protected data in `private` folders and develops code on **simulated** data in `public` folders.\n\n## Never\n\n- Read, list, open, search, or run code on anything in `inputs/private/` or `outputs/private/`.\n- Ask the user to paste real data, real output, or real summary values into the chat.\n- Hard-code values copied from real data into code or text.\n- Change a notebook's `data_dir` setting to `\"private\"`. Only a person does that, without AI.\n\n## Always\n\n- Work only with `inputs/public/`: the simulated data and the reviewed metadata in `inputs/public/metadata/`.\n- Build paths with `here::here()` and the notebook's `data_dir` variable, so a person can switch to the real data by changing one line.\n- Treat results as fake. Check that the code runs. Don't interpret the numbers.\n- If a task seems to need the real data, **stop and say so** instead of finding a workaround."
+    }
+  },
+  "source": {
+    "origin": "r",
+    "framework_version": "2.0.1"
+  }
+}
