@@ -6,13 +6,23 @@ This is a **privacy-sensitive** project. The protected data lives in `inputs/pri
 
 The "protected" file is public NHANES data, so nothing bad happens if you slip. Practice as if it weren't public.
 
+## Install packages
+
+Run this once in the R console, from the project folder:
+
+```r
+source("setup.R")
+```
+
+It installs any of this project's packages that are missing: tidyverse, rmarkdown, here.
+
 ## Open the project
 
 - **RStudio:** open `yale-ai-stats-04-protected-data.Rproj`.
 - **Positron or VS Code:** open this folder (or `yale-ai-stats-04-protected-data.code-workspace`).
 - **Claude Code or Codex:** start the tool from a terminal in this folder.
 
-You need R with the **tidyverse**, **rmarkdown**, and **here** packages, and Quarto (bundled with RStudio).
+You need R and Quarto (bundled with RStudio and Positron). `setup.R` installs the packages.
 
 ## Steps
 
