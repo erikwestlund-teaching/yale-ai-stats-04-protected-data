@@ -1,7 +1,8 @@
 # Generate simulated data from the reviewed metadata in inputs/public/metadata/.
 # The agent completes this script.
 
-library(tidyverse)
+library(readr)
+library(dplyr)
 
 metadata_dir <- here::here("inputs/public/metadata")
 output_path <- here::here("inputs/public/raw/nhanes_2021_2023_analysis.csv")

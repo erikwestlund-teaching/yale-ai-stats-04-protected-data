@@ -2,9 +2,11 @@
 # Run once from the project folder: source("setup.R")
 
 packages <- c(
-  "tidyverse",
-  "rmarkdown",
-  "here"
+  "readr",
+  "dplyr",
+  "ggplot2",
+  "here",
+  "rmarkdown"
 )
 
 missing <- setdiff(packages, rownames(installed.packages()))

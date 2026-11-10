@@ -14,12 +14,12 @@ Run this once in the R console, from the project folder:
 source("setup.R")
 ```
 
-It installs any of this project's packages that are missing: tidyverse, rmarkdown, here.
+It installs any of this project's packages that are missing: readr, dplyr, ggplot2, here, rmarkdown.
 
 ## Open the project
 
 - **RStudio:** open `yale-ai-stats-04-protected-data.Rproj`.
-- **Positron or VS Code:** open this folder (or `yale-ai-stats-04-protected-data.code-workspace`).
+- **Positron or VS Code:** open this folder.
 - **Claude Code or Codex:** start the tool from a terminal in this folder.
 
 You need R and Quarto (bundled with RStudio and Positron). `setup.R` installs the packages.
@@ -48,4 +48,4 @@ All of this sits in one folder on your laptop, which is weaker than a real encla
 
 ## About the folders
 
-This project was created from a [Framework](https://framework.pub) blueprint, so it has the folder layout of a real analysis project: raw data in `inputs/private/raw/` and `inputs/public/raw/`, notebooks in `notebooks/`, results in `outputs/`. You don't need the framework R package; the notebooks use plain R. Files like `settings.yml` and `scaffold.R` belong to Framework and can be ignored.
+This project was created from a [Framework](https://framework.pub) blueprint, so it has the folder layout of a real analysis project: raw data in `inputs/private/raw/` and `inputs/public/raw/`, notebooks in `notebooks/`, results in `outputs/`. You don't need the framework R package; the notebooks use plain R.
