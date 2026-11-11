@@ -1,7 +1,7 @@
 # Extract structural information from the protected data.
 # A person runs this, WITHOUT AI assistance.
 # It writes to outputs/private/metadata/. Review those files before copying
-# anything to inputs/public/metadata/.
+# the safe parts to inputs/metadata/, where agents can read them.
 
 input_path <- here::here("inputs/private/raw/nhanes_2021_2023_analysis.csv")
 output_dir <- here::here("outputs/private/metadata")
@@ -126,7 +126,7 @@ writeLines(
     "# Review Before Sharing",
     "",
     "These files are not automatically safe to share with AI tools.",
-    "Review them for identifiers, free text, rare categories, small cells, exact dates, geography, or other disclosive values before copying anything to inputs/public/metadata/."
+    "Review them for identifiers, free text, rare categories, small cells, exact dates, geography, or other disclosive values before copying anything to inputs/metadata/."
   ),
   file.path(output_dir, "REVIEW_BEFORE_SHARING.md")
 )

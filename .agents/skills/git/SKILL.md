@@ -15,6 +15,7 @@ description: How to use git in this project. Use before staging, committing, or 
 1. Run `git status` and read the list of changed files.
 2. Make sure none of these are staged:
    - anything in a `private/` folder
+   - anything in `inputs/metadata/` or `inputs/simulated/`, which derive from protected data
    - data files you didn't create from public sources
    - `.env`, credentials, or API keys
    - rendered output (`*.html`, `*_files/`) unless the user wants it committed

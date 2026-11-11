@@ -3,9 +3,10 @@ title: "Modeling"
 ---
 
 ```{r}
-# Which data to use. Develop with "public" (simulated).
-# Only a person, working WITHOUT AI, changes this to "private".
-data_dir <- "public"
+# Which data to use. "simulated" reads inputs/simulated/raw/.
+# Only a person, working WITHOUT AI, changes this to "private",
+# which reads inputs/private/raw/.
+data_dir <- "simulated"
 
 nhanes <- readr::read_csv(
   here::here("inputs", data_dir, "raw", "nhanes_2021_2023_analysis.csv"),

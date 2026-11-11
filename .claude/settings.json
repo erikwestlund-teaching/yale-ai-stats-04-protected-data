@@ -1,5 +1,9 @@
 {
   "permissions": {
+    "allow": [
+      "Read(/inputs/metadata/**)",
+      "Read(/inputs/simulated/**)"
+    ],
     "deny": [
       "Read(/inputs/private/**)",
       "Edit(/inputs/private/**)",
@@ -17,6 +21,10 @@
         "./inputs/private",
         "./outputs/private",
         "./.env"
+      ],
+      "denyWrite": [
+        "./inputs/private",
+        "./outputs/private"
       ]
     }
   }

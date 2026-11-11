@@ -2,12 +2,12 @@
 # ================================================================================
 # This project uses Framework's privacy-first structure.
 # All */private/ directories are gitignored by default.
-# Only */public/ directories can be committed after explicit review.
 #
 # WORKFLOW:
-#   1. Sensitive/raw data goes in */private/ directories (NEVER committed)
-#   2. De-identified/aggregated data goes in */public/ directories (safe to commit)
-#   3. Analysis scripts are committed, but outputs are carefully controlled
+#   1. Protected data goes in */private/ directories (NEVER committed)
+#   2. Reviewed metadata goes in inputs/metadata/ (ignored; agents can read it)
+#   3. Simulated data goes in inputs/simulated/ (ignored; agents can read it)
+#   4. Analysis scripts are committed, but outputs are carefully controlled
 #
 # CRITICAL: Private directories are NEVER committed to version control.
 # ================================================================================
@@ -33,6 +33,16 @@
 !/reference/**/.gitkeep
 !/outputs/**/README.md
 !/outputs/**/.gitkeep
+
+# Reviewed metadata and simulated data. Agents can read these folders, but
+# their contents still derive from protected data, so git ignores them.
+# The negations keep the empty folders (via .gitkeep) in the repository.
+/inputs/metadata/**
+/inputs/simulated/**
+!/inputs/metadata/**/
+!/inputs/simulated/**/
+!/inputs/metadata/**/.gitkeep
+!/inputs/simulated/**/.gitkeep
 
 # ============================================================================
 # SECRETS AND CREDENTIALS - NEVER COMMIT

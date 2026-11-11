@@ -5,7 +5,7 @@ description: Rules for working in a project that holds protected data. Use at th
 
 # Protected data
 
-This project keeps protected data in `private` folders and develops code on **simulated** data in `public` folders.
+This project keeps protected data in `private` folders. You develop code on **simulated** data in `inputs/simulated/`, generated from reviewed metadata in `inputs/metadata/`.
 
 ## Never
 
@@ -13,10 +13,11 @@ This project keeps protected data in `private` folders and develops code on **si
 - Ask the user to paste real data, real output, or real summary values into the chat.
 - Hard-code values copied from real data into code or text.
 - Change a notebook's `data_dir` setting to `"private"`. Only a person does that, without AI.
+- Write to `inputs/private/`, even to test `scripts/generate-sim-data.R`. Test it with an output path in a temporary folder.
 
 ## Always
 
-- Work only with `inputs/public/`: the simulated data and the reviewed metadata in `inputs/public/metadata/`.
+- Work only with `inputs/simulated/` and `inputs/metadata/`. Git ignores both folders, so open their files by path.
 - Build paths with `here::here()` and the notebook's `data_dir` variable, so a person can switch to the real data by changing one line.
 - Treat results as fake. Check that the code runs. Don't interpret the numbers.
 - If a task seems to need the real data, **stop and say so** instead of finding a workaround.
