@@ -1,6 +1,6 @@
 # Exercise 4: Working With Protected Data
 
-Part of the workshop **AI Tools for Statistical Programming and Analysis**. The prompts are on the workshop page.
+Part of the workshop **AI-Powered Coding and Data Analysis**. The prompts are on the workshop page.
 
 This is a **privacy-sensitive** project. The protected data lives in `inputs/private/`, and AI tools never see it. You develop the code with an agent against simulated data in `inputs/public/`, then run the finished code on the real data yourself.
 
