@@ -11,6 +11,7 @@
   "sandbox": {
     "enabled": true,
     "failIfUnavailable": true,
+    "allowUnsandboxedCommands": false,
     "filesystem": {
       "denyRead": [
         "./inputs/private",

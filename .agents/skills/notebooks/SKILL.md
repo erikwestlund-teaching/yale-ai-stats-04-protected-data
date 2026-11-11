@@ -35,4 +35,4 @@ set.seed(2026)  # only if the notebook uses randomness
 
 ## Data flow
 
-Raw data never changes. Cleaning writes new files next to it (usually `inputs/final/`), analysis reads the cleaned files, and results go to `outputs/`. The README lists this project's folders; follow it when it differs.
+Raw data never changes. Cleaning writes new files next to it (usually `inputs/final/`), analysis reads the cleaned files, and results go to `outputs/`. The README lists this project's folders; follow it when it differs. When the README says tasks are independent, each notebook reads its own inputs.

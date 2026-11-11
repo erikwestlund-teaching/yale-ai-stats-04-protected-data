@@ -22,12 +22,14 @@ It installs any missing packages used anywhere in the workshop: readr, dplyr, ti
 - **Positron or VS Code:** open this folder.
 - **Claude Code or Codex:** start the tool from a terminal in this folder.
 
+On Windows, Claude Code's sandbox needs WSL2. This project requires the sandbox, so Claude Code won't start here on Windows without WSL2. Use Codex or Posit Assistant instead.
+
 You need R and Quarto. Quarto comes with RStudio and Positron. `setup.R` installs the packages.
 
 ## Steps
 
 1. **Extract the structure, without AI.** With no assistant running, run `source("scripts/extract-data-info.R")`. It writes metadata to `outputs/private/metadata/`.
-2. **Review it.** Read every file. Look for identifiers, rare categories, small counts, exact dates, and free text. Delete or merge any category with a count under 50. Round or drop the minimum and maximum of skewed variables. Remove survey weights and design variables unless you need them. Copy only what's safe into `inputs/public/metadata/`.
+2. **Review it.** Read every file. Look for identifiers, rare categories, small counts, exact dates, and free text. Merge any category with a count under 50 into a larger one. Deleting it isn't enough, because the total and the other counts reveal it by subtraction. Round or drop the minimum and maximum of skewed variables. Remove survey weights and design variables unless you need them. Copy only what's safe into `inputs/public/metadata/`.
 3. **Simulate.** Have your agent complete and run `scripts/generate-sim-data.R`. It writes `inputs/public/raw/nhanes_2021_2023_analysis.csv`, the same file name as the real data.
 4. **Develop.** Have the agent fill in the two notebooks against the simulated data. The agent checks its code without rendering, because rendering writes to `outputs/private/`.
 5. **Run on the real data, without AI.** Close the assistant, change `data_dir` to `"private"` at the top of each notebook, and render. The HTML goes to `outputs/private/notebooks/`. Before sharing it, check for exact small counts, exact minimums and maximums, and plots with one point per person. Delete any text saying the data are simulated.
