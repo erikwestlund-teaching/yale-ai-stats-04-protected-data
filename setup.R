@@ -1,10 +1,12 @@
-# Install the R packages this project uses.
-# Run once from the project folder: source("setup.R")
+# Install the R packages every project in this workshop uses.
+# Run once, from any workshop project folder: source("setup.R")
 
 packages <- c(
   "readr",
   "dplyr",
+  "tidyr",
   "ggplot2",
+  "broom",
   "here",
   "rmarkdown"
 )

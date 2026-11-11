@@ -14,7 +14,7 @@ Run this once in the R console, from the project folder:
 source("setup.R")
 ```
 
-It installs any of this project's packages that are missing: readr, dplyr, ggplot2, here, rmarkdown.
+It installs any missing packages used anywhere in the workshop: readr, dplyr, tidyr, ggplot2, broom, here, and rmarkdown. If you already ran it for another workshop project, you can skip this step.
 
 ## Open the project
 
