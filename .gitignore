@@ -6,7 +6,7 @@
 # WORKFLOW:
 #   1. Protected data goes in */private/ directories (NEVER committed)
 #   2. Reviewed metadata goes in inputs/metadata/ (ignored; agents can read it)
-#   3. Simulated data goes in inputs/simulated/ (ignored; agents can read it)
+#   3. Simulated data stays in inputs/private/simulated/ on both machines
 #   4. Analysis scripts are committed, but outputs are carefully controlled
 #
 # CRITICAL: Private directories are NEVER committed to version control.
@@ -34,15 +34,11 @@
 !/outputs/**/README.md
 !/outputs/**/.gitkeep
 
-# Reviewed metadata and simulated data. Agents can read these folders, but
-# their contents still derive from protected data, so git ignores them.
-# The negations keep the empty folders (via .gitkeep) in the repository.
+# Reviewed metadata stays gitignored. Simulated files stay under private/.
+# Keep only empty folder markers in the repository.
 /inputs/metadata/**
-/inputs/simulated/**
 !/inputs/metadata/**/
-!/inputs/simulated/**/
 !/inputs/metadata/**/.gitkeep
-!/inputs/simulated/**/.gitkeep
 
 # ============================================================================
 # SECRETS AND CREDENTIALS - NEVER COMMIT
@@ -195,3 +191,9 @@ framework.db-shm
 /outputs/private/
 **/sensitive/**
 
+
+# Keep the secure simulated folder in downloads without tracking its data.
+!/inputs/private/
+/inputs/private/**
+!/inputs/private/simulated/
+!/inputs/private/simulated/.gitkeep

@@ -8,7 +8,7 @@
 #   Rscript scripts/generate-sim-data.R "$(mktemp -d)/nhanes_2021_2023_analysis.csv"
 #
 # The person runs it with no argument (or source() it), reviews the output as a
-# release, and copies it by hand to inputs/simulated/raw/.
+# release, and copies it by hand to inputs/private/simulated/ on the AI machine.
 
 library(readr)
 library(dplyr)

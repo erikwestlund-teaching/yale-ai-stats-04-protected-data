@@ -2,13 +2,18 @@
   "permissions": {
     "allow": [
       "Read(/inputs/metadata/**)",
-      "Read(/inputs/simulated/**)"
+      "Read(/inputs/private/simulated/**)"
     ],
     "deny": [
-      "Read(/inputs/private/**)",
-      "Edit(/inputs/private/**)",
+      "Read(/inputs/private/raw/**)",
+      "Edit(/inputs/private/raw/**)",
+      "Read(/inputs/private/intermediate/**)",
+      "Edit(/inputs/private/intermediate/**)",
+      "Read(/inputs/private/final/**)",
+      "Edit(/inputs/private/final/**)",
       "Read(/outputs/private/**)",
       "Edit(/outputs/private/**)",
+      "Edit(/inputs/private/simulated/**)",
       "Read(/.env)"
     ]
   },
@@ -18,13 +23,18 @@
     "allowUnsandboxedCommands": false,
     "filesystem": {
       "denyRead": [
-        "./inputs/private",
+        "./inputs/private/raw",
+        "./inputs/private/intermediate",
+        "./inputs/private/final",
         "./outputs/private",
         "./.env"
       ],
       "denyWrite": [
-        "./inputs/private",
-        "./outputs/private"
+        "./inputs/private/raw",
+        "./inputs/private/intermediate",
+        "./inputs/private/final",
+        "./outputs/private",
+        "./inputs/private/simulated"
       ]
     }
   }

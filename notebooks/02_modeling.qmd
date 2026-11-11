@@ -3,13 +3,13 @@ title: "Modeling"
 ---
 
 ```{r}
-# Which data to use. "simulated" reads inputs/simulated/raw/.
-# Only a person, working WITHOUT AI, changes this to "private",
+# Which data to use. "simulated" reads inputs/private/simulated/.
+# Only a person, working WITHOUT AI, changes this to "raw",
 # which reads inputs/private/raw/.
 data_dir <- "simulated"
 
 nhanes <- readr::read_csv(
-  here::here("inputs", data_dir, "raw", "nhanes_2021_2023_analysis.csv"),
+  here::here("inputs", "private", data_dir, "nhanes_2021_2023_analysis.csv"),
   show_col_types = FALSE
 )
 ```
