@@ -1,0 +1,33 @@
+---
+name: git
+description: How to use git in this project. Use before staging, committing, or pushing anything, and whenever the user mentions git or GitHub.
+---
+
+# Git
+
+## When to commit
+
+- Commit only when the user asks.
+- Never push unless the user asks. Never force-push.
+
+## Before every commit
+
+1. Run `git status` and read the list of changed files.
+2. Make sure none of these are staged:
+   - anything in a `private/` folder
+   - data files you didn't create from public sources
+   - `.env`, credentials, or API keys
+   - rendered output (`*.html`, `*_files/`) unless the user wants it committed
+3. If a file that should be private shows up, stop and tell the user. Don't commit it, and don't add it to `.gitignore` without saying so.
+
+Stage files by name (`git add notebooks/01_cleaning.qmd`). Don't use `git add .` or `git add -A`.
+
+## Commit messages
+
+- One line, under about 70 characters, in the imperative: "Clean subgroup labels", not "Cleaned stuff".
+- Say what changed and, if it's not obvious, why.
+
+## Never
+
+- Rewrite history the user has pushed (`rebase`, `reset --hard`, `commit --amend` on pushed commits).
+- Run `git commit --no-verify` to get around a hook. A hook that blocks a commit is doing its job; tell the user what it found.

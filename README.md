@@ -40,7 +40,7 @@ You need R and Quarto (bundled with RStudio and Positron). `setup.R` installs th
 | Pre-commit hook | Framework installs a git hook that refuses commits with private data (in projects it creates; a clone or zip doesn't include it) | Deterministic, but skipped by `git commit --no-verify` |
 | Tool permissions | `.claude/settings.json` denies Claude Code access to the private folders and turns on its sandbox | Enforced by the tool, but only that tool |
 | Context file | `AGENTS.md` | An instruction; the model can ignore it |
-| Skill | `protected-data` in `.agents/skills/` and `.claude/skills/` | An instruction; **not proof of safety** |
+| Skill | `protected-data` in `.agents/skills/` and `.claude/skills/` (with the general `git` skill: check `git status`, never stage `private/`) | An instruction; **not proof of safety** |
 
 All of this sits in one folder on your laptop, which is weaker than a real enclave. For real protected data, the strongest layer is separation: the agent runs on a machine, VM, or server where the data doesn't exist.
 
