@@ -16,7 +16,7 @@ Results go in `outputs/`, one folder per kind. Create the folder if it doesn't e
 ## Rules
 
 - Build paths with `here::here()`.
-- Name files for what they contain, in `snake_case`: `bp_by_age_group.csv`, not `table1.csv`.
+- Name files for what they contain, in `snake_case`. Use `bp_by_age_group.csv` instead of `table1.csv`.
 - Save only results someone will use. A rendered notebook already shows every table and figure, so don't save each one by default.
 - Never write to `inputs/`. Cleaned data is the data-cleaning skill's job.
 - Never save outputs that contain individual rows of protected data. Save summaries. If the project has a protected-data skill, its rules come first.

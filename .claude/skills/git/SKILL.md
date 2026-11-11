@@ -5,7 +5,7 @@ description: How to use git in this project. Use before staging, committing, or 
 
 # Git
 
-## When to commit
+## Commit timing
 
 - Commit only when the user asks.
 - Never push unless the user asks. Never force-push.
@@ -24,10 +24,10 @@ Stage files by name (`git add notebooks/01_cleaning.qmd`). Don't use `git add .`
 
 ## Commit messages
 
-- One line, under about 70 characters, in the imperative: "Clean subgroup labels", not "Cleaned stuff".
+- One line, under about 70 characters, in the imperative. Good: "Clean subgroup labels". Bad: "Cleaned stuff".
 - Say what changed and, if it's not obvious, why.
 
 ## Never
 
 - Rewrite history the user has pushed (`rebase`, `reset --hard`, `commit --amend` on pushed commits).
-- Run `git commit --no-verify` to get around a hook. A hook that blocks a commit is doing its job; tell the user what it found.
+- Run `git commit --no-verify` to get around a hook. If a hook blocks a commit, tell the user what it found.

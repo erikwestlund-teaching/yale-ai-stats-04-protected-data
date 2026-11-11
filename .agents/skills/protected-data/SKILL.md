@@ -20,3 +20,12 @@ This project keeps protected data in `private` folders and develops code on **si
 - Build paths with `here::here()` and the notebook's `data_dir` variable, so a person can switch to the real data by changing one line.
 - Treat results as fake. Check that the code runs. Don't interpret the numbers.
 - If a task seems to need the real data, **stop and say so** instead of finding a workaround.
+
+## Rendering
+
+Don't run `quarto render` in this project. It writes to `outputs/private/`. Never pass `--output-dir`. To check code, run it with `knitr::knit()` into a temporary folder. The user renders.
+
+```r
+knitr::opts_chunk$set(fig.path = file.path(tempdir(), "figure/"))
+knitr::knit("notebooks/01_data-summary.qmd", output = file.path(tempdir(), "01_data-summary.md"))
+```

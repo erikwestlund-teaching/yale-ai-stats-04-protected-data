@@ -12,7 +12,13 @@ if (!file.exists(input_path)) {
 
 dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 
-data <- read.csv(input_path, stringsAsFactors = FALSE, check.names = FALSE)
+# Blank text counts as missing, so "" is not reported as a category level.
+data <- read.csv(
+  input_path,
+  stringsAsFactors = FALSE,
+  check.names = FALSE,
+  na.strings = c("", "NA")
+)
 
 is_id_name <- function(name) {
   grepl("(^id$|_id$|identifier|record|participant|member|person)", name, ignore.case = TRUE)
