@@ -14,7 +14,7 @@ yale-ai-stats-04-protected-data/
   ai-enabled/   AI-ENABLED MACHINE: no protected data. Run Claude Code, Codex, or Posit Assistant here.
 ```
 
-Both copies have the same folders: raw data in `inputs/private/raw/`, simulated data in `inputs/private/simulated/`, reviewed metadata in `inputs/metadata/`. Only `secure/` has a file in `inputs/private/raw/`.
+Both copies use the same paths: simulated data in `inputs/private/simulated/` and reviewed metadata in `inputs/metadata/`. Only `secure/` has `inputs/private/raw/`, the protected data.
 
 They move things two ways:
 
@@ -130,7 +130,7 @@ In `secure/`, with no assistant running, change `data_dir` to `"raw"` at the top
 | Context file | `AGENTS.md` | An instruction; the model can ignore it |
 | Skill | `protected-data` in `.agents/skills/` and `.claude/skills/` (with the general `git` skill: check `git status`, never stage private data) | An instruction; **not proof of safety** |
 
-**On one laptop, the separation is on the honor system.** An agent started in `ai-enabled/` can reach `../secure/` with the same file access you have. `.claude/settings.json` denies Claude Code that folder, and `AGENTS.md` tells every agent to stay inside its own folder, but only separate machines enforce the boundary. For real protected data, use separate machines, VMs, or servers. Never run an assistant in the secure environment. The AI machine receives only reviewed metadata and the approved simulated file.
+**On one laptop, the separation is on the honor system.** An agent started in `ai-enabled/` can reach `../secure/` with the same file access you have. Claude Code's sandbox blocks its shell commands from that folder, and its Read tool asks before opening files outside the project. Say no. `AGENTS.md` tells every agent to stay inside its own folder, but only separate machines enforce the boundary. For real protected data, use separate machines, VMs, or servers. Never run an assistant in the secure environment. The AI machine receives only reviewed metadata and the approved simulated file.
 
 **Note for this course:** the protected file is not in this Git repository. The workshop ZIP adds it to `secure/` only. Earlier versions of the repository committed it, so it is still in the GitHub history.
 
