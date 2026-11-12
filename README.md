@@ -28,14 +28,49 @@ You need R and Quarto. Quarto comes with RStudio and Positron. `setup.R` install
 
 ## Steps
 
-1. **Extract the structure, without AI.** With no assistant running, run `source("scripts/extract-data-info.R")`. It writes metadata to `outputs/private/metadata/`.
-2. **Review the metadata.** Read every file. Look for identifiers, rare categories, small counts, exact dates, and free text. Merge any category with a count under 50 into a larger one. Deleting it isn't enough, because the total and the other counts reveal it by subtraction. Round or drop the minimum and maximum of skewed variables. Remove survey weights and design variables unless you need them. Copy only what's safe into `inputs/metadata/`.
-3. **Write the generator, with the agent.** Have your agent complete `scripts/generate-sim-data.R` from the files in `inputs/metadata/`. Its default output is `inputs/private/simulated/nhanes_2021_2023_analysis.csv`. The agent can't write there, so it tests the script by passing an output path in a temporary folder.
-4. **Generate, without AI.** Bring the reviewed generator script and metadata into the secure environment. With no assistant running, run `source("scripts/generate-sim-data.R")` there. It writes to `inputs/private/simulated/`.
-5. **Review the simulated data as a release, without AI.** Check for small cells, exact minimums and maximums, recognizable combinations of values, and IDs that match real ones.
-6. **Carefully transfer the approved simulated data to a safe machine.** After the required release review and approval, manually copy only `nhanes_2021_2023_analysis.csv` from `inputs/private/simulated/` on the secure machine to the same folder on the machine where you use AI. Verify that you selected the simulated file and that no raw data, unreviewed files, or other secure-side contents are included. Keep both copies out of git.
-7. **Develop the analysis.** Have the agent fill in the two notebooks. Each starts with `data_dir <- "simulated"`, so it reads `inputs/private/simulated/`. The agent checks its code without rendering, because rendering writes to `outputs/private/`.
-8. **Run on the real data, without AI.** Bring the reviewed code back to the secure machine. With no assistant running there, change `data_dir` to `"raw"` at the top of each notebook, and render. The notebooks then read `inputs/private/raw/`, and the HTML goes to `outputs/private/notebooks/`. Before sharing it, check for exact small counts, exact minimums and maximums, and plots with one point per person. Delete any text saying the data are simulated.
+### 1. SECURE MACHINE: Extract the metadata
+
+With no assistant running, run `source("scripts/extract-data-info.R")`. It writes metadata to `outputs/private/metadata/`.
+
+### 2. SECURE MACHINE: Review the metadata
+
+Review every file for identifiers, rare categories, small counts, exact dates, and free text. Merge categories with counts under 50 rather than deleting them, since other counts can reveal them by subtraction. Round or omit exact minimums and maximums that could identify people. Remove survey weights and design variables unless needed. Save only the reviewed metadata in `inputs/metadata/` on the secure machine.
+
+### 3. SECURE MACHINE → AI-ENABLED MACHINE: Copy the reviewed metadata
+
+Manually copy only the approved metadata to `inputs/metadata/` on the AI-enabled machine. Check the selected files before transferring them. Keep metadata out of Git; do not transfer raw data or unreviewed output.
+
+### 4. AI-ENABLED MACHINE: Write the generator
+
+Have the agent complete `scripts/generate-sim-data.R` using only the reviewed metadata. The script defaults to `inputs/private/simulated/nhanes_2021_2023_analysis.csv`. The agent tests it by passing an output path in a temporary folder, since it cannot write to `inputs/private/`.
+
+### 5. AI-ENABLED MACHINE → SECURE MACHINE: Transfer the generator through version control
+
+Review the generator and its changes. On the AI-enabled machine, commit and push only the generation script to the approved repository. On the secure machine, pull that commit without running an assistant. Inspect the staged changes before committing; keep data, metadata, and private outputs out of Git.
+
+### 6. SECURE MACHINE: Generate the simulated data
+
+With no assistant running, run `source("scripts/generate-sim-data.R")`. It reads the reviewed metadata and writes the simulated file to `inputs/private/simulated/`.
+
+### 7. SECURE MACHINE: Review the simulated data
+
+Review the generated file for small cells, exact minimums and maximums, recognizable combinations of values, and IDs that match real ones. Complete the required disclosure review and obtain approval before transferring it.
+
+### 8. SECURE MACHINE → AI-ENABLED MACHINE: Copy the approved simulated data
+
+Carefully copy only `nhanes_2021_2023_analysis.csv` from `inputs/private/simulated/` on the secure machine to the same path on the AI-enabled machine. Verify that it is the approved simulated file and that no raw data or unreviewed files are included. Keep both copies out of Git.
+
+### 9. AI-ENABLED MACHINE: Develop the analysis
+
+Have the agent fill in `notebooks/01_data-summary.qmd` and `notebooks/02_modeling.qmd`. Leave `data_dir <- "simulated"` so they read the approved simulated copy. Check code with `knitr::knit()` into a temporary folder. Do not render here, because rendering writes to `outputs/private/`. Develop and check the code without interpreting simulated results.
+
+### 10. AI-ENABLED MACHINE → SECURE MACHINE: Transfer the analysis through version control
+
+Review the analysis scripts and notebooks. On the AI-enabled machine, commit and push only the code to the approved repository. On the secure machine, pull those commits without running an assistant. Inspect staged changes before committing; keep data, metadata, and private outputs out of Git.
+
+### 11. SECURE MACHINE: Run the analysis on real data
+
+With no assistant running, change `data_dir` to `"raw"` at the top of each notebook and render them yourself. They read `inputs/private/raw/` and write HTML to `outputs/private/notebooks/`. Review all real-data output before sharing it, including small counts, exact minimums and maximums, and plots with one point per person. Remove text that describes the results as simulated.
 
 ## Layers of protection in this project
 
