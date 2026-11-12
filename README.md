@@ -2,9 +2,26 @@
 
 Part of the workshop **AI-Powered Coding and Data Analysis**. The prompts are on the workshop page.
 
-This is a **privacy-sensitive** project. Protected raw data lives in `inputs/private/raw/`, and AI tools never see it. Both machines use `inputs/private/raw/` for raw data and `inputs/private/simulated/` for simulated data. On the secure machine, generate and review the simulated file without AI. Manually copy the approved file to the same path on the AI machine, where the agent develops code against it. Run the finished code on the real data yourself on the secure machine. Simulated data comes from protected data, so it is never treated as public. Git ignores both copies, and you review the secure-side file before transferring it to the AI machine.
+This is a **privacy-sensitive** project. Protected raw data stays on a secure machine with no AI. An AI agent works on a second machine that has no protected data.
 
-The "protected" file is public NHANES data, so nothing bad happens if you slip. Practice as if it weren't public.
+## Two folders, two machines
+
+Download the ZIP from the workshop page. It holds two copies of this project that stand in for two machines:
+
+```
+yale-ai-stats-04-protected-data/
+  secure/       SECURE MACHINE: has the protected data. Never run an assistant here.
+  ai-enabled/   AI-ENABLED MACHINE: no protected data. Run Claude Code, Codex, or Posit Assistant here.
+```
+
+Both copies have the same folders: raw data in `inputs/private/raw/`, simulated data in `inputs/private/simulated/`, reviewed metadata in `inputs/metadata/`. Only `secure/` has a file in `inputs/private/raw/`.
+
+They move things two ways:
+
+- **Data and metadata**: you copy files by hand, in Finder or File Explorer, after reviewing them.
+- **Code**: Git. `secure/` is a clone of `ai-enabled/`, so you commit in `ai-enabled/` and run `git pull` in `secure/`.
+
+Git ignores all data and metadata in both copies.
 
 ## Install packages
 
@@ -18,9 +35,18 @@ It installs any missing packages used anywhere in the workshop: readr, dplyr, ti
 
 ## Open the project
 
-- **RStudio:** open `yale-ai-stats-04-protected-data.Rproj`.
-- **Positron or VS Code:** open this folder.
-- **Claude Code or Codex:** start the tool from a terminal in the AI-machine copy only.
+Open each folder as its own project, in two windows:
+
+- **RStudio:** open `secure/secure.Rproj` and `ai-enabled/ai-enabled.Rproj`.
+- **Positron or VS Code:** open the `secure` folder and the `ai-enabled` folder.
+- **Claude Code or Codex:** start the tool from a terminal in `ai-enabled/` only.
+
+Git commits need a name and email. If Git asks, run these once:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
 
 On Windows, Claude Code's sandbox needs WSL2. This project requires the sandbox, so Claude Code won't start here on Windows without WSL2. Use Codex or Posit Assistant instead.
 
@@ -30,7 +56,7 @@ You need R and Quarto. Quarto comes with RStudio and Positron. `setup.R` install
 
 ### 1. SECURE MACHINE: Extract the metadata
 
-With no assistant running, run `source("scripts/extract-data-info.R")`. It writes metadata to `outputs/private/metadata/`.
+In `secure/`, with no assistant running, run `source("scripts/extract-data-info.R")`. It writes metadata to `outputs/private/metadata/`.
 
 ### 2. SECURE MACHINE: Review the metadata
 
@@ -38,7 +64,7 @@ Review every file for identifiers, rare categories, small counts, exact dates, a
 
 ### 3. SECURE MACHINE → AI-ENABLED MACHINE: Copy the reviewed metadata
 
-Manually copy only the approved metadata to `inputs/metadata/` on the AI-enabled machine. Check the selected files before transferring them. Keep metadata out of Git; do not transfer raw data or unreviewed output.
+Copy only the approved files from `secure/inputs/metadata/` to `ai-enabled/inputs/metadata/` by hand. Check each file before you copy it. Never copy raw data or unreviewed output. Metadata stays out of Git.
 
 ### 4. AI-ENABLED MACHINE: Write the generator
 
@@ -46,11 +72,25 @@ Have the agent complete `scripts/generate-sim-data.R` using only the reviewed me
 
 ### 5. AI-ENABLED MACHINE → SECURE MACHINE: Transfer the generator through version control
 
-Review the generator and its changes. On the AI-enabled machine, commit and push only the generation script to the approved repository. On the secure machine, pull that commit without running an assistant. Inspect the staged changes before committing; keep data, metadata, and private outputs out of Git.
+Review the generator. In a terminal in `ai-enabled/`, check what changed, then commit only the script:
+
+```bash
+git status
+git add scripts/generate-sim-data.R
+git commit -m "Add simulated data generator"
+```
+
+In a terminal in `secure/`, with no assistant running, pull the commit:
+
+```bash
+git pull
+```
+
+On real machines, both copies push and pull through an approved shared repository instead.
 
 ### 6. SECURE MACHINE: Generate the simulated data
 
-With no assistant running, run `source("scripts/generate-sim-data.R")`. It reads the reviewed metadata and writes the simulated file to `inputs/private/simulated/`.
+In `secure/`, with no assistant running, run `source("scripts/generate-sim-data.R")`. It reads the reviewed metadata and writes the simulated file to `inputs/private/simulated/`.
 
 ### 7. SECURE MACHINE: Review the simulated data
 
@@ -58,7 +98,7 @@ Review the generated file for small cells, exact minimums and maximums, recogniz
 
 ### 8. SECURE MACHINE → AI-ENABLED MACHINE: Copy the approved simulated data
 
-Carefully copy only `nhanes_2021_2023_analysis.csv` from `inputs/private/simulated/` on the secure machine to the same path on the AI-enabled machine. Verify that it is the approved simulated file and that no raw data or unreviewed files are included. Keep both copies out of Git.
+Copy only `nhanes_2021_2023_analysis.csv` from `secure/inputs/private/simulated/` to `ai-enabled/inputs/private/simulated/` by hand. Check that it is the approved simulated file, not the raw file in `inputs/private/raw/`. Both copies stay out of Git.
 
 ### 9. AI-ENABLED MACHINE: Develop the analysis
 
@@ -66,11 +106,19 @@ Have the agent fill in `notebooks/01_data-summary.qmd` and `notebooks/02_modelin
 
 ### 10. AI-ENABLED MACHINE → SECURE MACHINE: Transfer the analysis through version control
 
-Review the analysis scripts and notebooks. On the AI-enabled machine, commit and push only the code to the approved repository. On the secure machine, pull those commits without running an assistant. Inspect staged changes before committing; keep data, metadata, and private outputs out of Git.
+Review the notebooks. In `ai-enabled/`, commit only the code:
+
+```bash
+git status
+git add notebooks/01_data-summary.qmd notebooks/02_modeling.qmd
+git commit -m "Add data summary and model"
+```
+
+In `secure/`, with no assistant running, run `git pull`.
 
 ### 11. SECURE MACHINE: Run the analysis on real data
 
-With no assistant running, change `data_dir` to `"raw"` at the top of each notebook and render them yourself. They read `inputs/private/raw/` and write HTML to `outputs/private/notebooks/`. Review all real-data output before sharing it, including small counts, exact minimums and maximums, and plots with one point per person. Remove text that describes the results as simulated.
+In `secure/`, with no assistant running, change `data_dir` to `"raw"` at the top of each notebook and render them yourself. They read `inputs/private/raw/` and write HTML to `outputs/private/notebooks/`. Review all real-data output before sharing it, including small counts, exact minimums and maximums, and plots with one point per person. Remove text that describes the results as simulated.
 
 ## Layers of protection in this project
 
@@ -82,9 +130,9 @@ With no assistant running, change `data_dir` to `"raw"` at the top of each noteb
 | Context file | `AGENTS.md` | An instruction; the model can ignore it |
 | Skill | `protected-data` in `.agents/skills/` and `.claude/skills/` (with the general `git` skill: check `git status`, never stage private data) | An instruction; **not proof of safety** |
 
-For this exercise, you can practice with separate project copies on one laptop. For real protected data, use separate machines, VMs, or servers. Never run the assistant in the secure environment. The AI machine receives only reviewed metadata and the approved simulated file.
+**On one laptop, the separation is on the honor system.** An agent started in `ai-enabled/` can reach `../secure/` with the same file access you have. `.claude/settings.json` denies Claude Code that folder, and `AGENTS.md` tells every agent to stay inside its own folder, but only separate machines enforce the boundary. For real protected data, use separate machines, VMs, or servers. Never run an assistant in the secure environment. The AI machine receives only reviewed metadata and the approved simulated file.
 
-**Note for this course:** the protected file is committed to this repository so the exercise works out of the box. It was added with `git add -f`, because `.gitignore` excludes it, and committed with `--no-verify`, because the pre-commit hook blocked it. Both protections stop accidents. They don't stop someone determined to get around them.
+**Note for this course:** the protected file is not in this Git repository. The workshop ZIP adds it to `secure/` only. Earlier versions of the repository committed it, so it is still in the GitHub history.
 
 ## Folder layout
 
@@ -92,8 +140,8 @@ This project was created from a [Framework](https://framework.pub) blueprint, so
 
 | Folder | Contents | Agents | Git |
 |---|---|---|---|
-| `inputs/private/raw/` | The protected data | No access | Ignored (this course commits the one file) |
-| `inputs/private/simulated/` | Secure machine: generated data awaiting review. AI machine: manually transferred, reviewed copy | Read on AI machine only | Ignored |
+| `inputs/private/raw/` | The protected data (`secure/` only) | No access | Ignored |
+| `inputs/private/simulated/` | `secure/`: generated data awaiting review. `ai-enabled/`: the approved copy you transferred | Read on AI machine only | Ignored |
 | `outputs/private/` | Unreviewed metadata and rendered notebooks | No access | Ignored |
 | `inputs/metadata/` | Metadata you reviewed and copied | Read | Ignored |
 | `scripts/`, `notebooks/` | Code | Read and write | Committed |

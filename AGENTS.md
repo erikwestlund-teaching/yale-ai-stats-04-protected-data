@@ -1,6 +1,8 @@
 # Yale AI Stats 04: Protected data
 
-This is the AI-machine copy of a privacy-sensitive project. Never run an assistant on the secure machine. Do not read, list, search, or print protected raw data in `inputs/private/raw/`, other private input folders, `outputs/private/`, or `.env`.
+This is a privacy-sensitive project. Run only in the AI-enabled copy, which has no protected data. Never run an assistant on the secure machine.
+
+In the workshop download, this project has two folders: `ai-enabled/` and `secure/`. If this project's folder is named `secure`, stop and tell the user to start you in `ai-enabled/` instead. Never read, list, or search anything outside this project folder, especially `../secure/`. Do not read, list, search, or print protected raw data in `inputs/private/raw/`, other private input folders, `outputs/private/`, or `.env`.
 
 The one readable private input folder is `inputs/private/simulated/` on the AI machine. It holds only simulated files a person reviewed and manually transferred from the secure machine. Work with those files and reviewed metadata in `inputs/metadata/`. Git ignores their data. Follow the `protected-data` skill.
 

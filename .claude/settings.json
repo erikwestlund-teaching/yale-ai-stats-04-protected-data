@@ -14,7 +14,9 @@
       "Read(/outputs/private/**)",
       "Edit(/outputs/private/**)",
       "Edit(/inputs/private/simulated/**)",
-      "Read(/.env)"
+      "Read(/.env)",
+      "Read(../secure/**)",
+      "Edit(../secure/**)"
     ]
   },
   "sandbox": {
@@ -27,14 +29,16 @@
         "./inputs/private/intermediate",
         "./inputs/private/final",
         "./outputs/private",
-        "./.env"
+        "./.env",
+        "../secure"
       ],
       "denyWrite": [
         "./inputs/private/raw",
         "./inputs/private/intermediate",
         "./inputs/private/final",
         "./outputs/private",
-        "./inputs/private/simulated"
+        "./inputs/private/simulated",
+        "../secure"
       ]
     }
   }

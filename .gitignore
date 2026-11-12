@@ -197,3 +197,6 @@ framework.db-shm
 /inputs/private/**
 !/inputs/private/simulated/
 !/inputs/private/simulated/.gitkeep
+
+# The workshop ZIP adds secure.Rproj and ai-enabled.Rproj, one per copy.
+/*.Rproj
