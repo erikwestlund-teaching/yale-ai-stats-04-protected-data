@@ -17,9 +17,7 @@ Results go in `outputs/`, one folder per kind. Create the folder if it doesn't e
 
 - Build paths with `here::here()`.
 - Name files for what they contain, in `snake_case`. Use `mean_income_by_region.csv` instead of `table1.csv`.
-- Save only results someone will use. A rendered notebook already shows every table and figure, so don't save each one by default.
 - Never write results to `inputs/`. Only a data-cleaning step writes there.
-- Never save outputs that contain individual rows of protected data. Save summaries. If the project has a protected-data skill, its rules come first.
 
 ## Slow steps
 

@@ -31,7 +31,7 @@ set.seed(2026)  # only if the notebook uses randomness
 - Explain each step in a sentence of prose before the chunk that does it.
 - Keep chunks short. One chunk, one idea.
 - Write a function when the same code appears three times. Put it in the notebook's first chunk.
-- Render the notebook to check that it runs from top to bottom before saying it's done. If the project has a `protected-data` skill, follow its rules for checking code instead.
+- Render the notebook to check that it runs from top to bottom before saying it's done, unless the project's instructions say not to render.
 
 ## Data flow
 
