@@ -15,7 +15,7 @@ description: How to use git in this project. Use before staging, committing, or 
 1. Run `git status` and read the list of changed files.
 2. Make sure none of these are staged:
    - data or output in any `private/` folder (empty `.gitkeep` folder markers are allowed)
-   - reviewed metadata in `inputs/metadata/` (except its empty `.gitkeep` marker)
+   - metadata extracted from protected data, such as files in `inputs/metadata/` (except an empty `.gitkeep` marker)
    - data files you didn't create from public sources
    - `.env`, credentials, or API keys
    - rendered output (`*.html`, `*_files/`) unless the user wants it committed
@@ -25,7 +25,7 @@ Stage files by name (`git add notebooks/01_cleaning.qmd`). Don't use `git add .`
 
 ## Commit messages
 
-- One line, under about 70 characters, in the imperative. Good: "Clean subgroup labels". Bad: "Cleaned stuff".
+- One line, under about 70 characters, in the imperative. Good: "Recode missing-value labels". Bad: "Cleaned stuff".
 - Say what changed and, if it's not obvious, why.
 
 ## Never
